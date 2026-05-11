@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SYAINSHOP | Portfolio Owner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --soft-pink: #fff5f8;
+        --gradient-primary: linear-gradient(135deg, #3764d5 0%, #3764d5 55%, #3764d5 100%);
+        --deep-accent: #4a232c;
+        --glass-bg: rgba(255, 255, 255, 0.7);
+        --white: #ffffff;
+        --rose-text: #7d4e5b;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Quicksand', sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--soft-pink);
+        background-image: radial-gradient(at 0% 0%, hsla(340, 100%, 95%, 1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(330, 100%, 92%, 1) 0, transparent 50%);
+        color: var(--deep-accent);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* --- NAVIGATION --- */
+      nav {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 1200px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        padding: 12px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 10px 30px rgba(255, 106, 136, 0.1);
+        z-index: 1000;
+      }
+
+      .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #3764d5;
+        text-decoration: none;
+        letter-spacing: 1px;
+      }
+
+      .menu-toggle {
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+
+      .menu-toggle span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background: var(--gradient-primary);
+        border-radius: 10px;
+        transition: 0.4s;
+      }
+
+      /* --- SIDEBAR OVERLAY --- */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background: var(--white);
+        padding: 120px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 999;
+        box-shadow: -20px 0 50px rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-overlay.active {
+        right: 0;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--deep-accent);
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 15px;
+        border-radius: 15px;
+        transition: 0.3s;
+      }
+
+      .nav-link:hover {
+        background: var(--soft-biru);
+        color: #3764d5;
+        padding-left: 25px;
+      }
+
+      /* --- HERO SECTION --- */
+      .hero {
+        padding: 160px 10% 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 60px;
+        min-height: 100vh;
+      }
+
+      .hero-text {
+        flex: 1;
+      }
+
+      /* GRADIENT TEXT EFFECT */
+      .hero-text h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        margin: 20px 0;
+        line-height: 1.1;
+        background: var(--gradient-primary);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+      }
+
+      .badge {
+        background: white;
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        box-shadow: 0 5px 15px rgba(255, 154, 139, 0.2);
+        color: #3764d5;
+      }
+
+      /* SINEMATIK HERO IMAGE */
+      .hero-img-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-img {
+        position: relative;
+        width: 380px;
+        height: 380px;
+        border-radius: 50%;
+        background: var(--white);
+        padding: 15px;
+        box-shadow:
+          0 20px 50px rgba(74, 35, 44, 0.15),
+          0 0 30px rgba(255, 77, 148, 0.1);
+        animation: floatingProfile 6s ease-in-out infinite;
+        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 8px solid rgba(255, 255, 255, 0.8);
+        overflow: hidden;
+      }
+
+      .hero-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        transition: transform 0.8s ease;
+      }
+
+      .hero-img:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 30px 70px rgba(255, 77, 148, 0.25);
+      }
+
+      .hero-img:hover img {
+        transform: scale(1.1);
+      }
+
+      @keyframes floatingProfile {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(-2deg);
+        }
+      }
+
+      /* --- SKILLS & CONTACT --- */
+      .skills-container {
+        padding: 60px 10%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .skill-card {
+        background: #3764d5(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        border-radius: 30px;
+        padding: 40px;
+        border: 1px solid var(--white);
+        transition: 0.4s;
+        text-align: center;
+      }
+
+      .skill-card:hover {
+        transform: translateY(-10px);
+        background: #3764d5;
+      }
+
+      .contact-section {
+        margin: 80px 10%;
+        background: var(--deep-accent);
+        padding: 80px 40px;
+        border-radius: 50px;
+        color: var(--white);
+        text-align: center;
+      }
+
+      .contact-btn {
+        display: inline-block;
+        background: var(--white);
+        color: var(--deep-accent);
+        padding: 15px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        margin: 10px;
+        transition: 0.3s;
+      }
+
+      .contact-btn:hover {
+        transform: scale(1.05);
+        background: var(--gradient-primary);
+        color: #3764d5;
+      }
+
+      /* --- MOBILE --- */
+      @media (max-width: 968px) {
+        .hero {
+          flex-direction: column-reverse;
+          text-align: center;
+          padding-top: 120px;
+        }
+        .hero-img {
+          width: 280px;
+          height: 280px;
+        }
+        .hero-text h1 {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <a href="#" class="logo">My Profile</a>
+      <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay">
+      <a href="#about" class="nav-link">🏠 Tentang Saya</a>
+      <a href="#skills" class="nav-link">✨ Skill </a>
+      <a href="javascript:void(0)" class="nav-link" id="link-marketplace">🛍️ Marketplace</a>
+      <a href="#contact" class="nav-link">💌 Hubungi Saya</a>
+    </div>
+
+    <section class="hero" id="about">
+      <div class="hero-text">
+        <span class="badge">✨ Verified Creative Developer</span>
+        <h1>Bridging Agribusiness with Modern Web Solutions.</h1>
+        <p>
+          Mahasiswi <b>Agribisnis Peternakan</b> yang lagi menaklukkan dunia coding. Di balik padatnya praktikum Pemrograman Web, aku membangun dan mengembangkan marketplace andalanku, <b>SYAINSHOP</b>. Menggabungkan logika struktur data
+          dengan desain visual yang tajam, elegan, dan berkelas adalah medan tempurku.. <em>Feel free to explore my store! </em>
+        </p>
+        <br />
+        <a href="#contact" class="contact-btn" style="background: var(--gradient-primary); color: #ffffff">Mampir ke Toko Yuk! </a>
+      </div>
+
+      <div class="hero-img-container">
+        <div class="hero-img">
+          <!-- Pastikan nama file gambar benar -->
+          <img src="/img/logo ps1.jpeg" alt="Syarman Haris" />
+        </div>
+      </div>
+    </section>
+
+    <section class="skills-container" id="skills">
+      <div class="skill-card">
+        <div style="font-size: 3rem">🐄</div>
+        <h3>Agribisnis</h3>
+        <p style="color: #3764d5; font-weight: bold">Animal Husbandry</p>
+        <p>Mengakselerasi potensi peternakan modern yang inovatif, produktif, dan berkelanjutan demi masa depan yang lebih maju.</p>
+      </div>
+      <div class="skill-card">
+        <div style="font-size: 3rem">✨</div>
+        <h3>Web Design</h3>
+        <p style="color: #3764d5; font-weight: bold">UI/UX Designer</p>
+        <p>Menciptakan antarmuka web yang rapi, modern, dan memikat mata adalah caraku mengubah barisan kode jadi pengalaman digital yang berkelas.</p>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem">Let's Collaborate!</h2>
+      <div style="margin-top: 30px">
+        <a href="javascript:void(0)" class="contact-btn" id="btn-ig">Instagram 📸</a>
+        <a href="javascript:void(0)" class="contact-btn" id="btn-wa">WhatsApp 💬</a>
+        <a href="javascript:void(0)" class="contact-btn" id="btn-mail">Email ✉️</a>
+      </div>
+    </section>
+
+    <script>
+      // --- 1. KONFIGURASI DATA ---
+      const socialConfig = {
+        instagram: 'syarman_haris',
+        whatsapp: '6285823104192',
+        email: 'syarmanharis12@gmail.com',
+        marketplace: 'https://shopee.co.id/syainshop',
+        pesanWA: 'Halo Syarman! Aku baru saja melihat portofoliomu dan ingin mampir ke SYAINSHOP. ✨',
+      };
+
+      // --- 2. LOGIKA NAVIGASI (SIDEBAR) ---
+      const menuToggle = document.getElementById('mobile-menu');
+      const navOverlay = document.getElementById('nav-overlay');
+
+      menuToggle.addEventListener('click', () => {
+        navOverlay.classList.toggle('active');
+      });
+
+      // Menutup menu saat link diklik
+      document.querySelectorAll('.nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          navOverlay.classList.remove('active');
+        });
+      });
+
+      // --- 3. LOGIKA TOMBOL HUBUNGI & MARKETPLACE ---
+
+      // Fungsi Klik Marketplace di Menu Garis Tiga
+      document.getElementById('link-marketplace').addEventListener('click', () => {
+        window.open(socialConfig.marketplace, '_blank');
+      });
+
+      // Tombol Instagram
+      document.getElementById('btn-ig').addEventListener('click', () => {
+        window.open(`https://www.instagram.com/${socialConfig.instagram}`, '_blank');
+      });
+
+      // Tombol WhatsApp
+      document.getElementById('btn-wa').addEventListener('click', () => {
+        const urlWA = `https://wa.me/${socialConfig.whatsapp}?text=${encodeURIComponent(socialConfig.pesanWA)}`;
+        window.open(urlWA, '_blank');
+      });
+
+      // Tombol Email
+      document.getElementById('btn-mail').addEventListener('click', () => {
+        window.location.href = `mailto:${socialConfig.email}?subject=Tanya PRINCESSHOP`;
+      });
+    </script>
+  </body>
+</html>
